@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  mysql:
+    container_name: mef-mysql
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: mef-test
+      MYSQL_ROOT_PASSWORD: helloKoding
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3307:3306"
+    restart: always
+  
+  web:
+    container_name: mef-api-service
+    build: Mef-server
+    restart: always
+    depends_on: 
+      - mysql
+    ports:
+      - "5000:8080"
+
